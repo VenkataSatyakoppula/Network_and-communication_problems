@@ -1,5 +1,5 @@
 #include<stdio.h>
-int n,m,data[50],divisor[10],out[10];
+int n,m,data[50],divisor[10],out[10]; //out[10] array stores the result in each iteration
 int xor(int a,int b){
     if(a==b){
         return 0;
@@ -7,16 +7,17 @@ int xor(int a,int b){
         return 1;
     }
 }
+//appends the zero's to data
 void append_zeros(int l,int n){
     for (int i = n; i < n+l-1; i++)
     {
         data[i] = 0;
     }
 }
-
+//calculates CRC 
 void CRC(){
     printf("intermediate values in division\n");
-    for (int i = 0; i < m-1; i++)
+    for (int i = 0; i < m-1; i++) //calculates initial values 
     {
         if (data[0]==1)
         {
@@ -28,10 +29,10 @@ void CRC(){
     out[m-1] = data[m];
     for (int i = 0; i < m; i++)
     {
-        printf("%d",out[i]);
+        printf("%d",out[i]); //printing out initial values
     }
     printf("\n");
-    for (int j = m+1; j < n+m; j++)
+    for (int j = m+1; j < n+m; j++) //calcultes remaining values
     {
         if (out[0]==1)
         {
@@ -46,16 +47,12 @@ void CRC(){
             out[i] = xor(out[i+1],0);
            }
         }
-        if ( j != m+n-1)
-        {
-            out[m-1] = data[j];
-        }
+        out[m-1] = data[j];
         for (int i = 0; i < m; i++)
         {
         printf("%d",out[i]);
         }
-        printf("\n");
-        
+        printf("\n");     
     }
     printf("CRC = ");
     for (int i = 0; i < m-1; i++)
@@ -79,20 +76,21 @@ int main(){
     {
         scanf("%d",&divisor[i]);
     }
+    printf("\n******Sender-Side******\n");
     printf("Number of zero's to be appended: %d \n",m-1);
-    append_zeros(m,n);
+    append_zeros(m,n); //this function will append zero's
     printf("Data After appending: ");
     for (int i = 0; i < n+m-1; i++)
     {
         printf("%d",data[i]);
     }
     printf("\n");
-    CRC();
-    for (int i = n; i < n+m-1; i++)
+    CRC(); //calling CRC function
+    for (int i = n; i < n+m-1; i++) //for loop to append CRC at the end of message
     {
         data[i] = out[i-n];
     }
-    printf("Generated message = ");
+    printf("Generated message = "); 
     for (int i = 0; i < n+m-1; i++)
     {
         if (i==n)
@@ -101,7 +99,12 @@ int main(){
         }
         printf("%d",data[i]);
     }
-    printf("\nReceiver_side: \n");
-    CRC();
+    printf("\n*******Receiver_side*******\n");
+    printf("Enter the data received: ");
+    for (int i = 0; i < n+m-1; i++)
+    {
+        scanf("%d",&data[i]);
+    }
+    CRC(); //calculating CRC at receiver side
 }
 

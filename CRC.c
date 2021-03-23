@@ -107,4 +107,3 @@ int main(){
     }
     CRC(); //calculating CRC at receiver side
 }
-

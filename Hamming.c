@@ -104,15 +104,21 @@ void receiver(){ //receiver function
             error = error + pow(2,i);
         }
     }
-    printf("\nError at position = %d\n",error);
-    if (data[error]==1) //correcting the bits
+    if (error!=0)
     {
-        data[error]=0;
+        printf("\nError at position = %d\n",error);
+        if (data[error]==1) //correcting the bits
+        {
+            data[error]=0;
+        }else
+        {
+            data[error]=1;
+        }
+        printf("Data after Error correction = ");
     }else
     {
-        data[error]=1;
+        printf("\nAll Bits received without any error\n");
     }
-    printf("Data after Error correction = ");
     for (int i = 1; i < data_limit+parity_bits+1; i++)
     {
         printf("%d ",data[i]);

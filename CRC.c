@@ -16,7 +16,6 @@ void append_zeros(int l,int n){
 }
 //calculates CRC 
 void CRC(){
-    printf("intermediate values in division\n");
     for (int i = 0; i < m-1; i++) //calculates initial values 
     {
         if (data[0]==1)
@@ -27,10 +26,6 @@ void CRC(){
         }  
     }
     out[m-1] = data[m];
-    for (int i = 0; i < m; i++)
-    {
-        printf("%d",out[i]); //printing out initial values
-    }
     printf("\n");
     for (int j = m+1; j < n+m; j++) //calcultes remaining values
     {
@@ -47,12 +42,7 @@ void CRC(){
             out[i] = xor(out[i+1],0);
            }
         }
-        out[m-1] = data[j];
-        for (int i = 0; i < m; i++)
-        {
-        printf("%d",out[i]);
-        }
-        printf("\n");     
+        out[m-1] = data[j];    
     }
     printf("CRC = ");
     for (int i = 0; i < m-1; i++)
@@ -106,4 +96,20 @@ int main(){
         scanf("%d",&data[i]);
     }
     CRC(); //calculating CRC at receiver side
+    int key=0;
+    for (int i = 0; i < m-1; i++)
+    {
+        if (out[i]==1)
+        {
+            printf("\nReceiver Rejects the data\n");
+            key=1;
+            break;
+        }
+    }
+    if (key==0)
+    {
+        printf("\nReceiver accepts data\n");
+    }
+    
+    
 }

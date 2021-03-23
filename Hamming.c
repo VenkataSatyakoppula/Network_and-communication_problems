@@ -5,7 +5,7 @@ int data_limit,parity_bits=0,count=0,j=0,k=0,l=0;
 void hamming(void);
 void display(int a[]);
 
-void display(int a[]){
+void display(int a[]){ //display the bits in data
     int j=0;
     for (int i = 1; i < data_limit+parity_bits+1; i++)
     {
@@ -17,7 +17,7 @@ void display(int a[]){
         printf("%d ",data[i]);
     }
 }
-int xor(int a[],int l){
+int xor(int a[],int l){ //checks no.of 1's
     int c=0;
     for (int i = 0; i < l; i++)
     {
@@ -33,7 +33,7 @@ int xor(int a[],int l){
         return 1;
     }
 }
-void sender(){
+void sender(){ //sender function
     printf("*******SENDER SIDE*******\n");   
     printf("Enter the length of data = ");
     scanf("%d",&data_limit);
@@ -59,7 +59,7 @@ void sender(){
     printf("Generated Bits =  ");
     display(ham);
 }
-void hamming(){
+void hamming(){ //calaculationg hamming code(parity bits)
     for (int i = 0; i < parity_bits; i++)
     {
         j=pow(2,i);
@@ -88,7 +88,7 @@ void hamming(){
     
 }
 
-void receiver(){
+void receiver(){ //receiver function
     printf("*******RECEIVER SIDE*******\n");
     printf("Enter the bits to be sent = \n");
     for (int i = 1; i < data_limit+parity_bits+1; i++)

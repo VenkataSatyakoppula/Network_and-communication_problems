@@ -2,6 +2,6 @@
 
 Personal Network and communication problems
 
-problem-1 is 1-bit parity check 
+problem-1 is 1-bit parity check
 problem-2 is CRC calculation
-
+Problem-3 is Hamming code

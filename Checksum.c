@@ -1,26 +1,112 @@
 #include<stdio.h>
-#include<string.h>
-int main(){
-    char data[20],s1[10],s2[10];
-    printf("Enter the 8-bit data = ");
-    scanf("%s",data);
-    printf("Data will be divided into 2 sections(8-bit,8-bit)\n");
-    for (int i = 0; i < strlen(data); i++)
+int data[20],carry=0,sum[10],s=0;
+int s1[10],s2[10];
+
+int add(int a,int b){
+    int c=0;
+    if (a==1)
     {
-        strcpy(&s1[i],&data[i]);
-        strcpy(&s2[i],&data[(strlen(data)/2)+i]);
+        c++;
+    } 
+    if(b==1){
+        c++;
     }
-    printf("\nSection-1: ");
-    for (int i = 0; i < strlen(data)/2; i++)
-    {
-        printf("%c",s1[i]);
+    if(carry==1){
+        c++;
     }
-    printf("\nSection-2: ");
-    for (int i = 0; i < strlen(data)/2; i++)
+    if (c==1)
     {
-        printf("%c",s2[i]);
+        carry=0;
+        return 1;
+    }else if (c==2)
+    {
+        carry=1;
+        return 0;
+    }else if(c==3){
+        carry=1;
+        return 1;
+    }else{
+        carry=0;
+        return 0;
+    }
+    // printf("%d%d",s,carry); 
+}
+void sender(){
+    printf("Enter data  8-bits only = \n");
+    for (int i = 0; i < 8; i++)
+    {
+        scanf("%d",&data[i]);
+    }
+    printf("\nSection-1 = ");
+    for (int i = 0; i < 4; i++)
+    {
+        s1[i] = data[i];
+        s2[i] = data[4+i];
+        printf("%d",s1[i]);
+    }
+    printf("\nsection-2 = ");
+    for (int i = 0; i < 4; i++)
+    {
+        printf("%d",s2[i]);
+    }
+    for (int i = 3; i >= 0; i--)
+    {
+        sum[i] = add(s1[i],s2[i]);
+    }
+    if (carry==1)
+    {
+        for (int i = 3; i >= 0; i--)
+        {
+            sum[i]=add(sum[i],0);
+        }  
+    }
+    printf("\nCheck sum = ");
+    for (int i = 0; i < 4; i++)
+    {
+        if (sum[i]==0)
+        {
+            sum[i]=1;
+        }else{
+            sum[i]=0;
+        }
+        printf("%d ",sum[i]);
+    }
+    printf("\nData sent to the receiver  = ");
+    for (int i = 0; i < 12; i++)
+    {
+        if (i<8)
+        {
+            printf("%d ",data[i]);
+        }else
+        {
+            printf("%d ",sum[i-8]);
+        } 
+    }  
+}
+void receiver(){
+    printf("Enter the data = \n");
+    for (int i = 0; i < 12; i++)
+    {
+        scanf("%d",&data[i]);
+    }
+    sender();
+    for (int i = 0; i < 4; i++)
+    {
+        if (sum[i]==1)
+        {
+            
+        }
+        
     }
     
+}
+int main(){
+    sender();
+    printf("\n");
+    receiver();
+    
+    
+
     
     
 }

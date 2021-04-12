@@ -44,7 +44,7 @@ char* sender() {
 	int buff=0,asc=0;
 	const char* buff_2;
 	char* binary,*output,*result;
-	result = strdup(" ");
+	result = strdup("_");
 	printf("Enter the data(in string with out gaps upto char[10]): ");
 	scanf("%s",msg);
 	for (int i = 0; i < strlen(msg); i++)
@@ -55,7 +55,7 @@ char* sender() {
 		binary = strdup(buff_2);
 		output = strdup(parity_check(binary));
 		printf("%s parity for letter %c \n",output,msg[i]);
-		strcat(output," ");
+		strcat(output,"_");
 		strcat(result,output);
 	}
 	printf("Bits needs to be sent to server is \n%s",result);
@@ -63,12 +63,15 @@ char* sender() {
 }
 
 char * receiver(char* msg){
-	
-
+	int i=1;
+	while (msg[i]!="_")
+	{
+		printf("%c",msg[i]);
+	}
 }
 int main()
 {
 	char* msg=sender();
-	// receiver();
+	receiver(msg);
 	
 }

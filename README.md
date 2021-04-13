@@ -1,7 +1,12 @@
 # Network_and-communication_problems
 
 Personal Network and communication problems
+LAB_1
+1-bit parity check 
+CRC calculation
+Hamming code
+Checksum
 
-problem-1 is 1-bit parity check
-problem-2 is CRC calculation
-Problem-3 is Hamming code
+LAB_2
+Stop_n_wait ->basic and Noisy channel
+Go_back_n_ARQ

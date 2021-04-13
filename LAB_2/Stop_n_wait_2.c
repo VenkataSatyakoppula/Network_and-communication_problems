@@ -29,9 +29,7 @@ void receiver(int fr){
 }
 int main()
 {
-    // srand(time(0));
-    // int num=random(1,3);
-    // timeout(num);
+    srand(time(0));
     printf("Enter the no.of frames= \n");
     scanf("%d",&n);
     printf("frames which needs to be sent\n");
@@ -75,13 +73,14 @@ int main()
                 while (i<n)
         {
             sender(frames[i]);
-            receiver(frames[i]);
             if (random_num(1,10)<5)
             {
+                receiver(frames[i]);
                 ack = 1;
                 i++;
             }else
             {
+                printf("FRAME IS LOST\n");
                 ack=0;
             }
             timeout(1);
@@ -90,7 +89,7 @@ int main()
                 printf("\nACK RECEIVED!!!\n");
             }else
             {
-                printf("\nACK LOST\n");
+                printf("\nRe-sending frame\n\n");
             }
         }
         break;    

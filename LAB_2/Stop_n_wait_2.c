@@ -16,19 +16,14 @@ int random_num(int lower, int upper)
     return num;
 }
 void sender(int fr){
-    printf("Sending frame = %d.....|....",fr);
-    // if (ack=1)
-    // {
-    //     printf("Received ACK");
-    // }else{
-    //     printf("ACK not received");
-    // }   
+    printf("Sending frame = %d.....|....",fr);  
 }
 void receiver(int fr){
     printf("Received frame = %d",fr);
 }
 int main()
 {
+    printf("\n****Stop_n_wait-ARQ****\n");
     srand(time(0));
     printf("Enter the no.of frames= \n");
     scanf("%d",&n);

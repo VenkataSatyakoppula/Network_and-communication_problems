@@ -80,7 +80,6 @@ int main()
     printf("\nEnter the size of window = ");
     scanf("%d",&win);
     int i=1;
-    printf("\n****ACK is lost****\n");
     while (i<n+1)
     {
         sender(i);

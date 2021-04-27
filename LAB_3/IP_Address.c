@@ -58,12 +58,7 @@ int main(){
         if (IP[i]==46)
         {
             c++;
-        }
-        // else if (IP[i]!=(48 || 49 || 50 || 51 || 52 || 53 || 54 || 55 || 56 || 57 || 46))
-        // {
-        //     temp=1;
-        // }
-        
+        }    
     }
     if (c>3 || strlen(IP)>15)
     {
@@ -73,8 +68,6 @@ int main(){
     tokens = str_split(IP,'.');
     for (int i = 0; *(tokens+i); i++)
     {
-        // printf("%s",*(tokens+i));
-        // printf("%d \n",**(tokens+i));
         temp = temp + IP_checker(atoi(*(tokens+i))) + 1;  
     }
     if (temp==4) 

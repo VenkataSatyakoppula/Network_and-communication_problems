@@ -39,7 +39,7 @@ char** str_split(char* a_str, const char splitter)
     return result;
 }
 int IP_checker(int num){
-    if (num>255)
+    if (num>255 || num<=0)
     {
         return 1;
     }else
@@ -53,13 +53,17 @@ int main(){
     int temp=0,c=0,cout=0;
     printf("Enter the IP Address in decimal form(xxx.xxx.xxx.xxx):");
     scanf("%s",IP);
-    
     for (int i = 0; i < strlen(IP); i++)
     {
         if (IP[i]==46)
         {
             c++;
         }
+        // else if (IP[i]!=(48 || 49 || 50 || 51 || 52 || 53 || 54 || 55 || 56 || 57 || 46))
+        // {
+        //     temp=1;
+        // }
+        
     }
     if (c>3 || strlen(IP)>15)
     {
@@ -70,9 +74,10 @@ int main(){
     for (int i = 0; *(tokens+i); i++)
     {
         // printf("%s",*(tokens+i));
-        temp = temp + IP_checker(atoi(*(tokens+i)));  
+        // printf("%d \n",**(tokens+i));
+        temp = temp + IP_checker(atoi(*(tokens+i))) + 1;  
     }
-    if (temp==0) 
+    if (temp==4) 
     {
         printf("IP Address is Valid!!!\n");
     }else

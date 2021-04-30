@@ -52,11 +52,11 @@ int IP_checker(int num){
 void validity(int i){
     if (i==0)
     {
-        printf("IP Address is Valid!!!\n");
+        printf("\n************************\n*IP Address is Valid!!!*\n************************\n\n");
     }
     else
     {
-        printf("IP Address is Invalid!!!\n");
+        printf("\n************************\n*IP Address is Invalid!!!*\n*************************\n\n");
     }
     
     
@@ -69,9 +69,10 @@ int main(){
     scanf("%s",IP);
     printf("Enter the Subnet mast in decimal number: ");
     scanf("%s",mask);
+    printf("\n\nIP Address = %s/%s\n\n",IP,mask);
     if (atoi(mask)>32)
     {
-        validity(1);
+        printf("Invalid Subnet mask \n");
         exit(0);
     }
     for (int i = 0; i < strlen(IP); i++)
@@ -80,7 +81,7 @@ int main(){
         {
             c++;
         } 
-        if (IP[i]!= (48 || 49 || 50 || 51 || 52 || 54 || 55 || 56 || 67 || 46))
+        if (IP[i]!= 48 && IP[i]!=49 && IP[i]!=50 && IP[i]!=51 && IP[i]!=52 && IP[i]!=54 && IP[i]!=55 && IP[i]!= 56 && IP[i]!= 57 && IP[i]!= 46 && IP[i]!= 53)
         {
             printf("%c \n",IP[i]);
             validity(1);

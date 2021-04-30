@@ -2,6 +2,7 @@
 #include<string.h>
 #include<assert.h>
 #include<stdlib.h>
+//str_split() function to  split the string source:Stackoverflow
 char** str_split(char* a_str, const char splitter)
 {
     char** result    = 0;
@@ -38,6 +39,7 @@ char** str_split(char* a_str, const char splitter)
     }
     return result;
 }
+//Ip checker function
 int IP_checker(int num){
     if (num>255 || num<=0)
     {
@@ -47,22 +49,48 @@ int IP_checker(int num){
         return 0;
     }  
 }
+void validity(int i){
+    if (i==0)
+    {
+        printf("IP Address is Valid!!!\n");
+    }
+    else
+    {
+        printf("IP Address is Invalid!!!\n");
+    }
+    
+    
+}
 int main(){
-    char IP[16];
+    char IP[16],mask[3];
     char **tokens;
     int temp=0,c=0,cout=0;
-    printf("Enter the IP Address in decimal form(xxx.xxx.xxx.xxx):");
+    printf("Enter the IP Address in decimal form(xxx.xxx.xxx.xxx): ");
     scanf("%s",IP);
+    printf("Enter the Subnet mast in decimal number: ");
+    scanf("%s",mask);
+    if (atoi(mask)>32)
+    {
+        validity(1);
+        exit(0);
+    }
     for (int i = 0; i < strlen(IP); i++)
     {
         if (IP[i]==46)
         {
             c++;
-        }    
+        } 
+        if (IP[i]!= (48 || 49 || 50 || 51 || 52 || 54 || 55 || 56 || 67 || 46))
+        {
+            printf("%c \n",IP[i]);
+            validity(1);
+            exit(0);
+        }
+           
     }
     if (c>3 || strlen(IP)>15)
     {
-        printf("IP Address is Invalid!!!\n");
+        validity(1);
         exit(0);
     }
     tokens = str_split(IP,'.');
@@ -72,9 +100,9 @@ int main(){
     }
     if (temp==4) 
     {
-        printf("IP Address is Valid!!!\n");
+        validity(0);
     }else
     {
-        printf("IP Address is Invalid!!!\n");
+        validity(1);
     }
 }

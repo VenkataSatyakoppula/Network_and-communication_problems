@@ -2,6 +2,7 @@
 #include<string.h>
 #include<assert.h>
 #include<stdlib.h>
+#include<math.h>
 //str_split() function to  split the string source:Stackoverflow
 char** str_split(char* a_str, const char splitter)
 {
@@ -57,6 +58,7 @@ void validity(int i){
     else
     {
         printf("\n************************\n*IP Address is Invalid!!!*\n*************************\n\n");
+        exit(0);
     }
     
     
@@ -64,13 +66,14 @@ void validity(int i){
 int main(){
     char IP[16],mask[3];
     char **tokens;
-    int temp=0,c=0,cout=0;
+    int temp=0,c=0,cout=0,ip_in_int[10],int_mask;
     printf("Enter the IP Address in decimal form(xxx.xxx.xxx.xxx): ");
     scanf("%s",IP);
-    printf("Enter the Subnet mast in decimal number: ");
+    printf("Enter the Subnet mask in decimal number: ");
     scanf("%s",mask);
     printf("\n\nIP Address = %s/%s\n\n",IP,mask);
-    if (atoi(mask)>32)
+    int_mask = atoi(mask);
+    if (int_mask>32)
     {
         printf("Invalid Subnet mask \n");
         exit(0);
@@ -97,7 +100,8 @@ int main(){
     tokens = str_split(IP,'.');
     for (int i = 0; *(tokens+i); i++)
     {
-        temp = temp + IP_checker(atoi(*(tokens+i))) + 1;  
+        ip_in_int[i] = atoi(*(tokens+i));
+        temp = temp + IP_checker(ip_in_int[i]) + 1;  
     }
     if (temp==4) 
     {
@@ -106,4 +110,13 @@ int main(){
     {
         validity(1);
     }
+    printf("\n**********Finding First,last and no.of address in Block**********\n");
+    // for (int i = 0; i < 4; i++)
+    // {
+    //     printf("%d ",ip_in_int[i]);
+    // }
+    printf("\n\nNo.of address in Block 2^(%d-%d)= %lld\n\n",32,int_mask,(long long)pow(2,(32-int_mask)));
+    
+
+
 }

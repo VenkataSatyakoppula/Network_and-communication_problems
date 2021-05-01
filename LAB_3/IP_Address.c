@@ -4,6 +4,25 @@
 #include<stdlib.h>
 #include<math.h>
 //str_split() function to  split the string source:Stackoverflow
+char *decimal_to_binary(int);
+char *decimal_to_binary(int dn)
+{
+  int i, j, temp;
+  char *ptr;
+  temp = 0;
+  ptr = (char*)malloc(8+1);
+  for (i = 7 ; i >= 0 ; i--)
+  {
+    j = dn >> i;
+    if (j & 1)
+      *(ptr+temp) = 1 + '0';
+    else
+      *(ptr+temp) = 0 + '0';
+    temp++;
+  }
+  *(ptr+temp) = '\0';
+  return  ptr;
+}
 char** str_split(char* a_str, const char splitter)
 {
     char** result    = 0;
@@ -111,12 +130,29 @@ int main(){
         validity(1);
     }
     printf("\n**********Finding First,last and no.of address in Block**********\n");
-    // for (int i = 0; i < 4; i++)
-    // {
-    //     printf("%d ",ip_in_int[i]);
-    // }
+    for (int i = 0; i < 4; i++)
+    {
+        printf("%d ",ip_in_int[i]);
+    }
     printf("\n\nNo.of address in Block 2^(%d-%d)= %lld\n\n",32,int_mask,(long long)pow(2,(32-int_mask)));
+    int app_bits = 32-int_mask;
+    char bits[33];
+    char t[]="";
+    char t2[100],t3[100];
+    for (int i = 0; i < 4; i++)
+    {
+        strcpy(t2,decimal_to_binary(ip_in_int[i]));
+        strcat(t,t2);
+        strcat(t,".");
+    }
+    strcpy(t3,decimal_to_binary(ip_in_int[3]));
+    strcat(t,t3);
+    printf("%s %s",t,t3);
+    // for (int i = 32-app_bits-1; i <app_bits; i++)
+    // {
+    //     char *t2 = &t[i];
+    //     strcpy(t2,"0");
+    // }
     
-
-
+    
 }

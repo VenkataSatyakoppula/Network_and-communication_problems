@@ -4,25 +4,6 @@
 #include<stdlib.h>
 #include<math.h>
 //str_split() function to  split the string source:Stackoverflow
-char *decimal_to_binary(int);
-char *decimal_to_binary(int dn)
-{
-  int i, j, temp;
-  char *ptr;
-  temp = 0;
-  ptr = (char*)malloc(8+1);
-  for (i = 7 ; i >= 0 ; i--)
-  {
-    j = dn >> i;
-    if (j & 1)
-      *(ptr+temp) = 1 + '0';
-    else
-      *(ptr+temp) = 0 + '0';
-    temp++;
-  }
-  *(ptr+temp) = '\0';
-  return  ptr;
-}
 char** str_split(char* a_str, const char splitter)
 {
     char** result    = 0;
@@ -105,7 +86,6 @@ int main(){
         } 
         if (IP[i]!= 48 && IP[i]!=49 && IP[i]!=50 && IP[i]!=51 && IP[i]!=52 && IP[i]!=54 && IP[i]!=55 && IP[i]!= 56 && IP[i]!= 57 && IP[i]!= 46 && IP[i]!= 53)
         {
-            printf("%c \n",IP[i]);
             validity(1);
             exit(0);
         }
@@ -136,23 +116,33 @@ int main(){
     }
     printf("\n\nNo.of address in Block 2^(%d-%d)= %lld\n\n",32,int_mask,(long long)pow(2,(32-int_mask)));
     int app_bits = 32-int_mask;
-    char bits[33];
-    char t[]="";
-    char t2[100],t3[100];
+    printf("No.of zero's to be replaced at the end for First Ip in block = %d",app_bits);
+    int n =  app_bits/8,i=0;
+    while (i<n)
+    {
+        ip_in_int[3-i]=0;
+    }
+    ip_in_int[3-n] = ip_in_int[3-n]>>(app_bits%8);
+    ip_in_int[3-n] = ip_in_int[3-n]<<(app_bits%8);
+    printf("\n\n");
+    printf("First IP Address of Block = ");
+    for (int j = 0; j < 3; j++)
+    {
+        printf("%d.",ip_in_int[j]);
+    }
+    printf("%d/%d",ip_in_int[3],int_mask);
+    printf("\n\n");
     for (int i = 0; i < 4; i++)
     {
-        strcpy(t2,decimal_to_binary(ip_in_int[i]));
-        strcat(t,t2);
-        strcat(t,".");
+        printf(".....\n");
     }
-    strcpy(t3,decimal_to_binary(ip_in_int[3]));
-    strcat(t,t3);
-    printf("%s %s",t,t3);
-    // for (int i = 32-app_bits-1; i <app_bits; i++)
-    // {
-    //     char *t2 = &t[i];
-    //     strcpy(t2,"0");
-    // }
-    
-    
+    printf("\n\n");
+    printf("Last IP Address of block = ");
+    ip_in_int[3-n] = ip_in_int[3-n] + pow(2,32-int_mask)-1;
+    for (int i = 0; i < 3; i++)
+    {
+        printf("%d.",ip_in_int[i]);
+    }
+    printf("%d/%d",ip_in_int[3],int_mask);
+    printf("\n\n");
 }

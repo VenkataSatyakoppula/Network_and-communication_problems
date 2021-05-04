@@ -3,7 +3,7 @@
 #include<assert.h>
 #include<stdlib.h>
 #include<math.h>
-//str_split() function to  split the string source:Stackoverflow
+//str_split() function to  split the string has been referenced from internet
 char** str_split(char* a_str, const char splitter)
 {
     char** result    = 0;
@@ -109,6 +109,7 @@ int main(){
     {
         validity(1);
     }
+    //finding first and last address blocks
     printf("\n**********Finding First,last and no.of address in Block**********\n");
     for (int i = 0; i < 4; i++)
     {
@@ -121,7 +122,9 @@ int main(){
     while (i<n)
     {
         ip_in_int[3-i]=0;
+        i++;
     }
+    //C right shift and leftshift operators to replace zeros at last of binary values of ip address
     ip_in_int[3-n] = ip_in_int[3-n]>>(app_bits%8);
     ip_in_int[3-n] = ip_in_int[3-n]<<(app_bits%8);
     printf("\n\n");
